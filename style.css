@@ -1,0 +1,29 @@
+.body{
+    background-size: cover;
+}
+
+.note{
+    width:100%;
+    margin: 0px;
+    font-size: 10px;
+}
+
+#song{
+    position: center;
+    
+}
+
+.heading{
+    width: 100%;
+
+}
+
+canvas{
+    border-radius: 3px;
+    box-shadow: 5px;
+}
+
+.play_button{
+    border-radius: 25px;
+    border: 5px;
+}
