@@ -1,9 +1,16 @@
 song1 = "";
 song2 = "";
 
+leftWristX = 0;
+leftWristY = 0;
+
+rightWristX = 0;
+rightWristY = 0;
+
 function preload(){
-    song1 = "https://open.spotify.com/track/1BCtK8dvweYnIB37Ld7vS9?si=53c2013658e5485a"
-    song2 = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.min.js"
+    song1 = loadSound("harryPotter.mp3");
+    song2 = loadSound("peterPan.mp3");
+
 }
 
 function setup(){
@@ -12,6 +19,13 @@ function setup(){
 
     video = createCapture(VIDEO);
     video.hide();
+
+    poseNet = ml5.poseNet(video,modelLoaded);
+    poseNet.on('pose', gotPoses)
+}
+
+function modelLoaded(){
+    console.log('poseNet has been initalized!')
 }
 
 function draw(){
@@ -19,6 +33,19 @@ function draw(){
 }
 
 function play(){
-    song.play()
+    song.play();
+    song.rate(1);
+    song.volume(1);
+}
 
+function gotPoses(results){
+    if (results.length > 1){
+        leftWristX = results[0].pose.leftWrist.x;
+        leftWristY = results[0].pose.leftWrist.y;
+        console.log("leftWristX = " +leftWristX + " leftWristY = " + leftWristY);
+        
+        rightWristX = results[0].pose.rightWrist.x;
+        rightWristY = results[0].pose.rightWrist.y;
+        console.log("rightWristX = " +rightWristX + " rightWristY = " + rightWristY);
+    }
 }
